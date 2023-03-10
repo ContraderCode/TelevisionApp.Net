@@ -45,19 +45,14 @@ namespace ToDoApp.Api.Controllers
         {
             var itemInsert = await this.programmaService.PostProgrammaDTOAsync(dto, aziendaId);
 
-            Console.WriteLine("OK");
             if (itemInsert is not null)
             {
-                Console.WriteLine("OK2");
-
                 return CreatedAtAction(
                     nameof(GetProgramma),
                     new { id = itemInsert.Id },
                     itemInsert
                 );
             }
-            Console.WriteLine("NONOK");
-
             return BadRequest();
         }
 
