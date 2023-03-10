@@ -13,6 +13,6 @@ namespace ToDoApp.BusinessLayer.Services.Interfaces
         Task<bool> PutProgrammaDTOAsync(int id, CreaProgrammaDTO programmaDTO);
         Task<bool> DeleteProgrammaDTOAsync(int id);
 
-        Task<IEnumerable<ProgrammaDTO>> ListaProgrammiPerOrario(DateTime orarioIn, DateTime orarioFin);
+        Task<IEnumerable<ProgrammaDTO>> ListaProgrammiPerOrario(String from, String to);
     }
 }

@@ -103,10 +103,10 @@ namespace ToDoApp.BusinessLayer.Services
             return false;
         }
 
-        public async Task<IEnumerable<ProgrammaDTO>> ListaProgrammiPerOrario(DateTime orarioIn, DateTime dataFin)
+        public async Task<IEnumerable<ProgrammaDTO>> ListaProgrammiPerOrario(String from, String to)
         {
            return await this._db.Programma
-                    .Where(item => item.Orario >= orarioIn && item.Orario <=dataFin)
+                    .Where(item => item.Orario >= DateTime.Parse(from) && item.Orario <= DateTime.Parse(to))
                     .OrderByDescending(item => item.Orario)
                     .ProjectTo<ProgrammaDTO>(_mapper.ConfigurationProvider)
                     .ToListAsync();

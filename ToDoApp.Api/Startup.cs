@@ -71,7 +71,6 @@ namespace ToDoApp.Api
             }
 
             app.UseRouting();
-            app.UseMiddleware<GlobalExceptionHandler>();
 
             app.UseSerilogRequestLogging();
             app.UseAuthorization();

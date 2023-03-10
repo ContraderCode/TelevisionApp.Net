@@ -45,19 +45,14 @@ namespace ToDoApp.Api.Controllers
         {
             var itemInsert = await this.programmaService.PostProgrammaDTOAsync(dto, aziendaId);
 
-            Console.WriteLine("OK");
             if (itemInsert is not null)
             {
-                Console.WriteLine("OK2");
-
                 return CreatedAtAction(
                     nameof(GetProgramma),
                     new { id = itemInsert.Id },
                     itemInsert
                 );
             }
-            Console.WriteLine("NONOK");
-
             return BadRequest();
         }
 
@@ -88,9 +83,9 @@ namespace ToDoApp.Api.Controllers
         }
 
         [HttpGet("/listaProgrammi")]
-        public async Task<ActionResult<IEnumerable<ProgrammaDTO>>> ListaProgrammiPerOrario(DateTime orarioIn, DateTime orarioFin)
+        public async Task<ActionResult<IEnumerable<ProgrammaDTO>>> ListaProgrammiPerOrario(String from, String to)
         {      
-            return this.Ok( await this.programmaService.ListaProgrammiPerOrario(orarioIn, orarioFin));    
+            return this.Ok( await this.programmaService.ListaProgrammiPerOrario(from, to));    
         }
     }
 }

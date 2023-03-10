@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿
+using Microsoft.EntityFrameworkCore;
 using ToDoApp.DataAccessLayer.Entities;
 namespace ToDoApp.DataAccessLayer;
 

@@ -20,6 +20,11 @@ namespace ToDoApp.BusinessLayer.Mappers
 
             this.CreateMap<Azienda, AziendaDTO>()
                .ForMember(dto => dto.Name, opt => opt.MapFrom(source => source.Name));
+
+            this.CreateMap<Programma, ProgrammaDTO>()
+                .ForMember(dto => dto.Nome, opt => opt.MapFrom(source => source.Nome))
+                .ForMember(dto => dto.Orario, opt => opt.MapFrom(source => source.Orario))
+                .ForMember(dto => dto.Azienda, opt => opt.MapFrom(source => source.Azienda));
         }
     }
 }
