@@ -12,8 +12,8 @@ using ToDoApp.DataAccessLayer;
 namespace ToDoApp.DataAccessLayer.Migrations
 {
     [DbContext(typeof(TodoappContext))]
-    [Migration("20230308152014_merge")]
-    partial class merge
+    [Migration("20230313094635_program2Migration2")]
+    partial class program2Migration2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

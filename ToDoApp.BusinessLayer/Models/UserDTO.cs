@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using ToDoApp.DataAccessLayer.Entities;
 
 namespace ToDoApp.BusinessLayer.Models
 {
@@ -12,6 +12,8 @@ namespace ToDoApp.BusinessLayer.Models
         public string Indirizzo { get; set; }
         public DateTime DataNascita { get; set; }
         public List<ProgrammaDTO> listaPreferiti { get; set; }
+
+        public Ruolo Ruolo { get; set; }
 
     }
 }
