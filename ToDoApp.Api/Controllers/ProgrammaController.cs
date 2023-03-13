@@ -41,9 +41,9 @@ namespace ToDoApp.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<ProgrammaDTO>> PostProgramma(CreaProgrammaDTO dto, long aziendaId)
+        public async Task<ActionResult<ProgrammaDTO>> PostProgramma(CreaProgrammaDTO dto, long aziendaId, int uid)
         {
-            var itemInsert = await this.programmaService.PostProgrammaDTOAsync(dto, aziendaId);
+            var itemInsert = await this.programmaService.PostProgrammaDTOAsync(dto, aziendaId, uid);
 
             if (itemInsert is not null)
             {
@@ -58,9 +58,9 @@ namespace ToDoApp.Api.Controllers
 
         // PUT: api/TodoItems/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutProgramma(int id, CreaProgrammaDTO dto)
+        public async Task<IActionResult> PutProgramma(int id, CreaProgrammaDTO dto, int uid)
         {
-            var updateItem = await this.programmaService.PutProgrammaDTOAsync(id, dto);
+            var updateItem = await this.programmaService.PutProgrammaDTOAsync(id, dto, uid);
 
             if (updateItem == false)
             {
@@ -71,9 +71,9 @@ namespace ToDoApp.Api.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteTodoItem(int id)
+        public async Task<IActionResult> DeleteTodoItem(int id, int uid)
         {
-            var isDeleted = await this.programmaService.DeleteProgrammaDTOAsync(id);
+            var isDeleted = await this.programmaService.DeleteProgrammaDTOAsync(id, uid);
             if (isDeleted == false)
             {
                 return NotFound();

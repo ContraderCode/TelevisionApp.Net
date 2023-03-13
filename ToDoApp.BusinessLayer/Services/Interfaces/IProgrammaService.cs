@@ -9,9 +9,9 @@ namespace ToDoApp.BusinessLayer.Services.Interfaces
     {
         Task<IEnumerable<ProgrammaDTO>> GetProgrammaDTOAsync();
         Task<ProgrammaDTO> GetProgrammaDTOAsyncById(int id);
-        Task<ProgrammaDTO> PostProgrammaDTOAsync(CreaProgrammaDTO programmaDTO, long aziendaId);
-        Task<bool> PutProgrammaDTOAsync(int id, CreaProgrammaDTO programmaDTO);
-        Task<bool> DeleteProgrammaDTOAsync(int id);
+        Task<ProgrammaDTO> PostProgrammaDTOAsync(CreaProgrammaDTO programmaDTO, long aziendaId, int uid);
+        Task<bool> PutProgrammaDTOAsync(int id, CreaProgrammaDTO programmaDTO, int uid);
+        Task<bool> DeleteProgrammaDTOAsync(int id, int uid);
 
         Task<IEnumerable<ProgrammaDTO>> ListaProgrammiPerOrario(String from, String to);
     }

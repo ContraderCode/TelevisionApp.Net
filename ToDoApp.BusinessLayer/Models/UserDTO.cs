@@ -14,7 +14,5 @@ namespace ToDoApp.BusinessLayer.Models
         public Ruolo Ruolo { get; set; }
         public List<ProgrammaDTO> listaPreferiti { get; set; }
 
-        public Ruolo Ruolo { get; set; }
-
     }
 }
