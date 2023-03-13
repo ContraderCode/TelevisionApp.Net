@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
+using ToDoApp.BusinessLayer.Exceptions;
 
 public class GlobalExceptionHandler
 {
@@ -23,6 +24,13 @@ public class GlobalExceptionHandler
             context.Response.StatusCode = 500;
 			var response = "Nessun cambiamento nel database";
 			await context.Response.WriteAsync(response);
+        }
+		
+		catch (NoPermissionsException ex)
+		{
+            context.Response.StatusCode = 401;
+            var response = "Nessun cambiamento nel database";
+            await context.Response.WriteAsync(response);
         }
 
         catch (DbUpdateException ex)

@@ -41,7 +41,7 @@ namespace ToDoApp.BusinessLayer.Services
                 Email = userDTO.Email,
                 DataNascita = userDTO.DataNascita,
                 Indirizzo = userDTO.Indirizzo,
-                Ruolo = Ruolo.USER
+                Ruolo = userDTO.Ruolo
             };
 
             this._db.Users.Add(user);

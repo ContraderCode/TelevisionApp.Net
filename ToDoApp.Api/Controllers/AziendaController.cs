@@ -19,35 +19,35 @@ namespace ToDoApp.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<AziendaDTO>>> getAll()
+        public async Task<ActionResult<IEnumerable<AziendaDTO>>> getAll(long uid)
         {
-            return this.Ok(await this._aziendaService.getAll());    
+            return this.Ok(await this._aziendaService.getAll(uid));    
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<AziendaDTO>> getAziendaByid(long id)
+        public async Task<ActionResult<AziendaDTO>> getAziendaByid(long uid, long id)
         {
-            return this.Ok(await this._aziendaService.getAziendaById(id));
+            return this.Ok(await this._aziendaService.getAziendaById(uid, id));
         }
 
         //ADMIN e AZIENDA
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<bool>> deleteAzienda(long id)
+        public async Task<ActionResult<bool>> deleteAzienda(long uid, long id)
         {
-            return this.Ok(await this._aziendaService.DeleteAzienda(id));   
+            return this.Ok(await this._aziendaService.DeleteAzienda(uid, id));   
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<bool>> updateAzienda(long id, AziendaDTO aziendaDTO)
+        public async Task<ActionResult<bool>> updateAzienda(long uid, long id, AziendaDTO aziendaDTO)
         {
-            return this.Ok(await this._aziendaService.UpdateAzienda(id, aziendaDTO));   
+            return this.Ok(await this._aziendaService.UpdateAzienda(uid, id, aziendaDTO));   
         }
 
         [HttpPost]
-        public async Task<ActionResult<AziendaDTO>> postAzienda(AziendaDTO aziendaDTO)
+        public async Task<ActionResult<AziendaDTO>> postAzienda(long uid, AziendaDTO aziendaDTO)
         {
-            return this.Ok(await this._aziendaService.PostAzienda(aziendaDTO));   
+            return this.Ok(await this._aziendaService.PostAzienda(uid, aziendaDTO));   
         }
 
 
