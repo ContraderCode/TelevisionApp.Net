@@ -60,6 +60,7 @@ namespace ToDoApp.BusinessLayer.Services
 
         public async Task<AziendaDTO> PostAzienda(long uid, AziendaDTO aziendaDTO)
         {
+            if (!await _roleService.CheckIfUserWithIdHasRole(uid, Ruolo.AMMINISTRATORE)) throw new NoPermissionsException();
             var azienda = new Azienda
             {
                 Name = aziendaDTO.Name,
@@ -79,6 +80,7 @@ namespace ToDoApp.BusinessLayer.Services
 
         public async Task<bool> UpdateAzienda(long uid, long id, AziendaDTO aziendaDTO)
         {
+            if (!await _roleService.CheckIfUserWithIdHasRole(uid, Ruolo.AMMINISTRATORE)) throw new NoPermissionsException();
             var azienda = await this._db.Aziendas.FindAsync(id);  
             
             if(azienda == null)
