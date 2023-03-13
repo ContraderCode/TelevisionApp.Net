@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 using ToDoApp.BusinessLayer.Exceptions;
 using ToDoApp.BusinessLayer.Models;
@@ -13,7 +14,7 @@ using ToDoApp.DataAccessLayer.Entities;
 
 namespace ToDoApp.BusinessLayer.Services
 {
-    public class ProgrammaService : IProgrammaService 
+    public class ProgrammaService : IProgrammaService
     {
         private readonly IMapper _mapper;
         private readonly TodoappContext _db;
@@ -28,7 +29,7 @@ namespace ToDoApp.BusinessLayer.Services
 
         public async Task<bool> DeleteProgrammaDTOAsync(int id, int uid)
         {
-            if (!await _roleService.CheckIfUserWithIdHasRole(uid, Ruolo.ADMIN) || !await _roleService.CheckIfUserWithIdHasRole(uid, Ruolo.AMMINISTRATORE)) throw new NoPermissionsException();
+            if (!await _roleService.CheckIfUserWithIdHasRole(uid, Ruolo.AMMINISTRATORE)|| !await _roleService.CheckIfUserWithIdHasRole(uid, Ruolo.ADMIN)) throw new NoPermissionsException();
 
             var dto = await _db.Programma.FindAsync(id);
             if(dto is not null)
@@ -59,9 +60,9 @@ namespace ToDoApp.BusinessLayer.Services
             return null;
         }
 
-        public async Task<ProgrammaDTO> PostProgrammaDTOAsync(CreaProgrammaDTO programmaDTO, long aziendaId,int uid)
+        public async Task<ProgrammaDTO> PostProgrammaDTOAsync(CreaProgrammaDTO programmaDTO, long aziendaId, int uid)
         {
-            if (!await _roleService.CheckIfUserWithIdHasRole(uid, Ruolo.ADMIN) || !await _roleService.CheckIfUserWithIdHasRole(uid, Ruolo.AMMINISTRATORE)) throw new NoPermissionsException();
+            if (!await _roleService.CheckIfUserWithIdHasRole(uid, Ruolo.AMMINISTRATORE) || !await _roleService.CheckIfUserWithIdHasRole(uid, Ruolo.ADMIN)) throw new NoPermissionsException();
 
             var azienda = await this._db.Aziendas.FindAsync(aziendaId);
 
@@ -91,7 +92,7 @@ namespace ToDoApp.BusinessLayer.Services
 
         public async Task<bool> PutProgrammaDTOAsync(int id, CreaProgrammaDTO dto, int uid)
         {
-            if (!await _roleService.CheckIfUserWithIdHasRole(uid, Ruolo.ADMIN) || !await _roleService.CheckIfUserWithIdHasRole(uid, Ruolo.AMMINISTRATORE)) throw new NoPermissionsException();
+            if (!await _roleService.CheckIfUserWithIdHasRole(uid, Ruolo.AMMINISTRATORE) || !await _roleService.CheckIfUserWithIdHasRole(uid, Ruolo.ADMIN)) throw new NoPermissionsException();
 
             var item = await this._db.Programma.FindAsync(id);
             if (item == null)

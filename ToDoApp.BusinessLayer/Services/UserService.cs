@@ -72,28 +72,28 @@ namespace ToDoApp.BusinessLayer.Services
         {
             var user = await _db.Users.FindAsync(id);
 
-            if(user == null)
+            if (user == null)
             {
                 return false;
             }
 
             this._db.Users.Remove(user);
             await this._db.SaveChangesAsync();
-            return true;    
+            return true;
         }
 
         public async Task<bool> UpdateUser(long id, UserDTO userDTO)
         {
             var user = await this._db.Users.FindAsync(id);
 
-            if( user == null)
+            if (user == null)
             {
                 return false;
             }
 
-            user.Indirizzo = userDTO.Indirizzo; 
+            user.Indirizzo = userDTO.Indirizzo;
             user.Name = userDTO.Name;
-            user.DataNascita = userDTO.DataNascita; 
+            user.DataNascita = userDTO.DataNascita;
             user.Email = userDTO.Email;
             user.listaPreferiti = _mapper.Map<List<Programma>>(userDTO.listaPreferiti);
 
@@ -102,7 +102,8 @@ namespace ToDoApp.BusinessLayer.Services
             if (isDone > 0)
             {
                 return true;
-            } else throw new NoChangesException();
+            }
+            else throw new NoChangesException();
         }
 
         public async Task<Boolean> SetPreferito(long user_id, int prog_id)
