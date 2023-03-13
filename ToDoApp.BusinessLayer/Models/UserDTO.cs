@@ -11,6 +11,7 @@ namespace ToDoApp.BusinessLayer.Models
         public string Email { get; set; }
         public string Indirizzo { get; set; }
         public DateTime DataNascita { get; set; }
+        public Ruolo Ruolo { get; set; }
         public List<ProgrammaDTO> listaPreferiti { get; set; }
 
         public Ruolo Ruolo { get; set; }

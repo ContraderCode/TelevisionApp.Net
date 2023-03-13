@@ -63,7 +63,8 @@ public partial class TodoappContext : DbContext
 
             modelBuilder.Entity<Programma>()
                 .HasOne(u => u.Azienda)
-                .WithMany(u => u.Programmi); 
+                .WithMany(u => u.Programmi)
+                .OnDelete(DeleteBehavior.ClientCascade);
 
         });
 
@@ -79,6 +80,7 @@ public partial class TodoappContext : DbContext
                 .HasMany(u => u.listaPreferiti)
                 .WithMany(u => u.listaUtentiConPreferito)
                 .UsingEntity(i => i.ToTable("Preferiti"));
+                
         }
         );
 

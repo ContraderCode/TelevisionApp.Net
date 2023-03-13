@@ -3,9 +3,8 @@ using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using ToDoApp.BusinessLayer.Exceptions;
 using ToDoApp.BusinessLayer.Models;
 using ToDoApp.BusinessLayer.Services.Interfaces;
 using ToDoApp.DataAccessLayer;
@@ -17,15 +16,18 @@ namespace ToDoApp.BusinessLayer.Services
     {
         private readonly IMapper _mapper;
         private readonly TodoappContext _db;
+        private readonly IRoleService _roleService;
 
-        public AziendaService(IMapper mapper, TodoappContext db)
+        public AziendaService(IMapper mapper, TodoappContext db, IRoleService roleService)
         {
             this._mapper = mapper;
             this._db = db;
+            this._roleService = roleService;
         }
 
-        public async Task<bool> DeleteAzienda(long id)
+        public async Task<bool> DeleteAzienda(long uid, long id)
         {
+            if (!await _roleService.CheckIfUserWithIdHasRole(uid, Ruolo.AMMINISTRATORE)) throw new NoPermissionsException();
             var azienda = await _db.Aziendas.FindAsync(id);
 
             if(azienda == null)
@@ -37,7 +39,7 @@ namespace ToDoApp.BusinessLayer.Services
             return true;
         }
 
-        public async Task<IEnumerable<AziendaDTO>> getAll()
+        public async Task<IEnumerable<AziendaDTO>> getAll(long uid)
         {
             return await this._db.Aziendas
                   .ProjectTo<AziendaDTO>(this._mapper.ConfigurationProvider)
@@ -45,7 +47,7 @@ namespace ToDoApp.BusinessLayer.Services
 
         }
 
-        public async Task<AziendaDTO> getAziendaById(long id)
+        public async Task<AziendaDTO> getAziendaById(long uid, long id)
         {
             var aziendaDto = await this._db.Aziendas.FindAsync(id);
 
@@ -56,7 +58,7 @@ namespace ToDoApp.BusinessLayer.Services
             return this._mapper.Map<AziendaDTO>(aziendaDto);
         }
 
-        public async Task<AziendaDTO> PostAzienda(AziendaDTO aziendaDTO)
+        public async Task<AziendaDTO> PostAzienda(long uid, AziendaDTO aziendaDTO)
         {
             var azienda = new Azienda
             {
@@ -75,7 +77,7 @@ namespace ToDoApp.BusinessLayer.Services
             return null;
         }
 
-        public async Task<bool> UpdateAzienda(long id, AziendaDTO aziendaDTO)
+        public async Task<bool> UpdateAzienda(long uid, long id, AziendaDTO aziendaDTO)
         {
             var azienda = await this._db.Aziendas.FindAsync(id);  
             

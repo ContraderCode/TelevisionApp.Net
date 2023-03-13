@@ -9,13 +9,13 @@ namespace ToDoApp.BusinessLayer.Services.Interfaces
 {
     public interface IAziendaService
     {
-        Task<IEnumerable<AziendaDTO>> getAll();
+        Task<IEnumerable<AziendaDTO>> getAll(long uid);
 
-        Task<AziendaDTO> getAziendaById(long id);
-        Task<AziendaDTO> PostAzienda(AziendaDTO aziendaDTO);
+        Task<AziendaDTO> getAziendaById(long uid, long id);
+        Task<AziendaDTO> PostAzienda(long uid, AziendaDTO aziendaDTO);
 
-        Task<bool> DeleteAzienda(long id);
+        Task<bool> DeleteAzienda(long uid, long id);
 
-        Task<bool> UpdateAzienda(long id, AziendaDTO aziendaDTO);
+        Task<bool> UpdateAzienda(long uid, long id, AziendaDTO aziendaDTO);
     }
 }
