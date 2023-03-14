@@ -3,6 +3,7 @@ using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
@@ -115,11 +116,16 @@ namespace ToDoApp.BusinessLayer.Services
 
         public async Task<IEnumerable<ProgrammaDTO>> ListaProgrammiPerOrario(String from, String to)
         {
-           return await this._db.Programma
+            if (DateTime.ParseExact(from, "dd/MM/yyyy", CultureInfo.InvariantCulture).Equals(DateTime.Parse(from)) && DateTime.ParseExact(to, "dd/MM/yyyy", CultureInfo.InvariantCulture).Equals(DateTime.Parse(to)))
+            {
+                 return await this._db.Programma
                     .Where(item => item.Orario >= DateTime.Parse(from) && item.Orario <= DateTime.Parse(to))
                     .OrderByDescending(item => item.Orario)
                     .ProjectTo<ProgrammaDTO>(_mapper.ConfigurationProvider)
                     .ToListAsync();
+            }
+            throw new Exception();
+
         }
 
     }

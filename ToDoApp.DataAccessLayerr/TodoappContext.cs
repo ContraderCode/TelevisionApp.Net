@@ -34,6 +34,7 @@ public partial class TodoappContext : DbContext
                 .HasColumnName("last_modified");
             entity.Property(e => e.Name)
                 .IsRequired()
+
                 .HasMaxLength(60)
                 .IsUnicode(false)
                 .HasColumnName("name");
